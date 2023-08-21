@@ -1,6 +1,8 @@
 package uniandes.algobc.structures;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Gene {
 	
@@ -25,7 +27,7 @@ public class Gene {
 	/**
 	 * List of ontology terms associated with this gene
 	 */
-	private ArrayList<Ontology> ontologies;
+	private HashMap<String,Ontology> ontologies;
 	
 	//Methods
 	
@@ -41,7 +43,7 @@ public class Gene {
 		this.sequenceName = sequenceName;
 		this.first = first;
 		this.last = last;
-		ontologies = new ArrayList<>();
+		ontologies = new HashMap<>();
 	}
 	
 	/**
@@ -75,7 +77,7 @@ public class Gene {
 	/**
 	 * @return ArrayList<Ontology> List of ontology terms associated with this gene
 	 */
-	public ArrayList<Ontology> getOntologies() {
+	public HashMap<String,Ontology> getOntologies() {
 		return ontologies;
 	}
 
@@ -84,7 +86,7 @@ public class Gene {
 	 * @param ontology New ontology term
 	 */
 	public void addOntology (Ontology ontology) {
-		ontologies.add(ontology);
+		ontologies.put(ontology.getId(),ontology);
 	}
 	
 	/**
@@ -93,8 +95,8 @@ public class Gene {
 	 * @return boolean true if this gene is associated with an ontology term having the given id, false otherwise
 	 */
 	public boolean hasOntology(String ontologyId) {
-		for(Ontology o:ontologies) {
-			if(o.getId().equals(ontologyId)) return true;
+		for(Map.Entry<String, Ontology> o:ontologies.entrySet()) {
+			if(o.getValue().getId().equals(ontologyId)) return true;
 		}
 		return false;
 	}

@@ -25,12 +25,16 @@ public class TreeMapGeneCatalog implements GeneCatalog {
 		ArrayList<Gene> listaGen = new ArrayList<Gene>();
 		for(Map.Entry<String, Gene> x:treeGene.entrySet()) {
 			Gene gen = x.getValue();
-			for(int i=0; i<gen.getOntologies().size();i++) {
+			if(!gen.getOntologies().get(ontologyId).equals(null)) {
+				listaGen.add(gen);
+			}
+			
+			/*for(int i=0; i<gen.getOntologies().size();i++) {
 				if(gen.getOntologies().get(i).getId().equals(ontologyId)) {
 					listaGen.add(gen);
 					break;
 				}
-			}
+			}*/
 		}
 		return listaGen;
 		

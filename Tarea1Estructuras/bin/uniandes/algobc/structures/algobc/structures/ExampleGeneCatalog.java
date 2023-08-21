@@ -4,9 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class ExampleGeneCatalog {
@@ -194,8 +195,11 @@ public class ExampleGeneCatalog {
 			System.out.println("First: "+gene.getFirst());
 			System.out.println("Last: "+gene.getLast());
 			System.out.println("Ontologies: ");
-			ArrayList<Ontology> ontologies = gene.getOntologies();
-			for(Ontology o:ontologies) System.out.println(""+o.getId()+"\t"+o.getName());
+			HashMap<String,Ontology> ontologies = gene.getOntologies();
+			for(Map.Entry<String, Ontology> o:ontologies.entrySet()) {
+				Ontology onto = o.getValue();
+				System.out.println(""+onto.getId()+"\t"+onto.getName());
+			}
 		} else {
 			System.out.println("Gene "+geneId+" not found");
 		}

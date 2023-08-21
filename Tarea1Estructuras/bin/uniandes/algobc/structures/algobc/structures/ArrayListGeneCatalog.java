@@ -1,6 +1,7 @@
 package uniandes.algobc.structures;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ArrayListGeneCatalog implements GeneCatalog {
 	private ArrayList<Gene> genes = new ArrayList<>();
@@ -42,18 +43,24 @@ public class ArrayListGeneCatalog implements GeneCatalog {
 	@Override
 	public ArrayList<Gene> getGenes(String ontologyId) {
 		//TODO: Implement method
-		ArrayList<Gene> listaGen = new ArrayList();
-		ArrayList<Ontology> listaOntology = null;
+		ArrayList<Gene> listaGen = new ArrayList<Gene>();
+		//ArrayList<Ontology> listaOntology = null;
+		HashMap<String,Ontology> listaOntology = null;
 		
 		//Recorre ArrayList de genes
 		for(int i=0; i<genes.size();i++) {
+			//listaOntology = genes.get(i).getOntologies();
 			listaOntology = genes.get(i).getOntologies();
+			if(!listaOntology.get(ontologyId).equals(null)) {
+				listaGen.add(genes.get(i));
+			}
+			
 			//Recorre ArrayList de ontologías del gen actual
-			for (int j=0; j<listaOntology.size();j++) {
+			/*for (int j=0; j<listaOntology.size();j++) {
 				if(listaOntology.get(j).getId().equals(ontologyId)) {
 					listaGen.add(genes.get(i));
 				}
-			}
+			}*/
 		}		
 		return listaGen;
 	}

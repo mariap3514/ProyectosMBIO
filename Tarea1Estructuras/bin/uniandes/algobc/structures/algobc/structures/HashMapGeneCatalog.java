@@ -2,6 +2,7 @@ package uniandes.algobc.structures;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class HashMapGeneCatalog implements GeneCatalog {
 	//
@@ -22,6 +23,20 @@ public class HashMapGeneCatalog implements GeneCatalog {
 	@Override
 	public ArrayList<Gene> getGenes(String ontologyId) {
 		// TODO Auto-generated method stub
-		return new ArrayList <> (hashGenes.values());	
+		ArrayList<Gene> listaGen = new ArrayList<Gene>();
+		for(Map.Entry<String, Gene> x:hashGenes.entrySet()) {
+			Gene gen = x.getValue();
+			if(!gen.getOntologies().get(ontologyId).equals(null)) {
+				listaGen.add(gen);
+			}
+			
+			/*for(int i=0; i<gen.getOntologies().size();i++) {
+				if(gen.getOntologies().get(i).getId().equals(ontologyId)) {
+					listaGen.add(gen);
+					break;
+				}
+			}*/
+		}
+		return listaGen;
 	}
 }
